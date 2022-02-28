@@ -1,0 +1,27 @@
+doctype html
+html
+  head
+    title 
+      | InfluenceMobile
+    meta[name="viewport" content="width=device-width,initial-scale=1"]
+    = csrf_meta_tags
+    = csp_meta_tag
+
+    = stylesheet_link_tag "application", "data-turbo-track": "reload"
+    = javascript_include_tag "application", "data-turbo-track": "reload", defer: true
+
+  body.flex.flex-col.justify-center
+    header.flex-none
+      =render 'layouts/nav'
+
+    main#app.mx-auto.mt-20.w-3/4
+      =yield
+
+      #search
+
+      #content
+
+    footer.mx-auto.mt-10.mb-48.w-3/4.text-right.text-slate-400
+      | Hire Ryan Detert<sup>&trade;</sup>
+
+    = yield(:js)

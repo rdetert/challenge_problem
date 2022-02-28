@@ -1,0 +1,10 @@
+-content_for(:js) do
+  javascript:
+    window.addEventListener("load", () => {
+      renderPage("#{request.path}", "#{form_authenticity_token}");
+    });
+
+
+h1.mb-5
+  | This page uses React
+

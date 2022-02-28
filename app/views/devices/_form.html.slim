@@ -1,0 +1,35 @@
+=form_for @device, class: 'space-y-8.divide-y.divide-gray-200' do |f|
+  - if @device.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@device.errors.count, 'error')} prohibited this device from being saved:"
+      ul
+        - @device.errors.full_messages.each do |message|
+          li = message
+
+  .space-y-8.divide-y.divide-gray-200
+    .pt-8
+      div
+        h3.text-lg.leading-6.font-medium.text-gray-900
+          =local_assigns[:title]
+      .mt-6.grid.grid-cols-1.gap-y-6.gap-x-4
+        .col-span-3
+          =select_collection(f, Player, :player_id, Player.without_device.order(first_name: :asc), :id, :full_name, 'Player')
+
+        .col-span-3
+          =f.label :device_model, 'Model', class: "block text-sm font-medium text-gray-700"
+          =f.text_field :device_model, class: 'shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md'
+        
+        .col-span-3
+          =select_enum f, :os
+        
+        .col-span-3
+          =f.label :os_version, class: "block text-sm font-medium text-gray-700"
+          =f.text_field :os_version, class: 'shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md'
+
+        .col-span-3
+          =select_enum f, :locale
+  .pt-5
+    .flex.justify-end
+      =link_to 'Cancel', devices_path, class: " bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+  
+      =f.submit 'Save', class: "ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
